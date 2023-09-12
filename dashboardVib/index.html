@@ -33,7 +33,7 @@
     <link href="dashboard.css" rel="stylesheet">
 
 
-    <title>Dashboard Template · Bootstrap v5.0</title>
+    <title>Dashboard Maintenance Monitoringd</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 
@@ -86,6 +86,8 @@
     
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
+
+    <script type="text/javascript" src="FilterAlertsByZone.js"></script>
 
 
 
@@ -145,10 +147,10 @@
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
        
-        <a class="me-3 py-2 text-white text-decoration-block" href="https://maintenaceengraisjln.github.io/dashboardVib/" >Vibration</a>
+        <a class="me-3 py-2 text-white text-decoration-block" href="../vibration/" >Vibration</a>
         
-        <a class="me-3 py-2 text-white text-decoration-none" href="https://maintenaceengraisjln.github.io/dashboardTmp/">Température</a>
-        <a class="me-3 py-2 text-white text-decoration-none" href="https://maintenaceengraisjln.github.io/dashboardRlt/">Jeu de roulement</a>
+        <a class="me-3 py-2 text-white text-decoration-none" href="../temperature/">Température</a>
+        <a class="me-3 py-2 text-white text-decoration-none" href="../roulement/">Jeu de roulement</a>
         
       </nav>
 
@@ -317,6 +319,49 @@
 
 
       <h2 id='alarmesLabel'>Liste des alarmes</h2>
+
+    <table>
+        <tr>
+          <td >
+              <a class="nav-link" href="#">
+                <span data-feather="folder-minus"></span>
+                Zone :
+              </a>
+            </td>
+
+            <td width= "80%">
+      
+                <div class="col-md-8" style="padding-left: 10px">
+                 <select class="form-select" id="valueSelectorAlertZone" name="select" onchange="handleDropdownAlertZone()" style="padding-left: 10px">
+
+                    <option value="Tous les zones" selected>Tous les zones</option>
+                    <option value="07A" >07A</option>
+                    <option value="07B" >07B</option>
+                    <option value="07C" >07C</option>
+                    <option value="07D" >07D</option>
+                    <option value="107A" >107A</option>
+                    <option value="107B" >107B</option>
+                    <option value="107C" >107C</option>
+                    <option value="18" >U18</option>
+                    <option value="118" >U118</option>
+                    <option value="155" >155</option>
+                    <option value="116" >116</option>
+                    <option value="16" >U16</option>
+                    <option value="08" >U08</option>
+
+
+              </select>
+
+
+              </div>
+            </td>
+          </tr>
+          <tr><td></td><td></td></tr>
+
+        </table>
+
+
+
       <div class="table-responsive">
 
         <div id="responseTable1">
