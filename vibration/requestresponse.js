@@ -326,4 +326,82 @@
 
 
 
+    function sendHttpRequestForAlert(selectedValue) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = xhr.responseText;
+          displayResponseForAlert(response,selectedValue);
+        }
+      };
+      xhr.open("GET", "https://script.google.com/macros/s/AKfycbzefFDcfX2c4Pe0ufUYDc7kcn-YP3DfQZTI7sa_VhFUQaoVwsd2v8EuG-s9Ga9ieuRB/exec?func=RR&id=10", true);  // Replace with your API endpoint
+      xhr.send();
+    };
+
+      
+
+    function displayResponseForAlert(response,selectedValue) {
+          var responseLines = response.trim().split('\n');
+
+
+ 
+          var equipementSet = new Set();
+          var pointarray = [];
+          var seuilVarray = [];
+          var seuilAarray = [];
+   
+          for (var i = 1; i < responseLines.length; i++) {
+            var fields = responseLines[i].split(',');
+            if (selectedValue==fields[2]){
+              equipementSet.add(fields[0]);
+              pointarray.push(fields[3]);
+              seuilVarray.push(fields[4]);
+              seuilAarray.push(fields[5]);
+            }
+          }
+
+
+
+
+
+          
+          const pointString = pointarray.join(",");
+          const seuilVString = seuilVarray.join(",");
+          const seuilAString = seuilAarray.join(",");
+
+          document.getElementById("pointstr").innerText= pointString;
+          document.getElementById("seuilVstr").innerText= seuilVString;
+          document.getElementById("seuilAstr").innerText= seuilAString;
+
+
+
+
+          
+
+
+        var select = document.getElementById('valueSelectorEquipementForAlert');
+
+        var option = document.createElement('option');
+          option.value = 'Blank';
+          option.text = 'Choose ...';
+          select.appendChild(option);
+
+
+        equipementSet.forEach(function(ligne) {
+          var option = document.createElement('option');
+          option.value = ligne;
+          option.text = ligne;
+          select.appendChild(option);
+        });
+
+        var dropdown = document.getElementById("valueSelectorLigneForAlert");
+            dropdown.disabled = false;
+        var dropdown1 = document.getElementById("valueSelectorEquipementForAlert");
+            dropdown1.disabled = false;
+
+
+      };
+
+
+
 

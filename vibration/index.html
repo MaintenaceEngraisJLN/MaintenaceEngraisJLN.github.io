@@ -275,6 +275,103 @@
 
 
 
+
+<h2 id='alarmesLabel'>Etat de vibration par équipement</h2>
+
+    <table>
+        <tr>
+          <td >
+              <a class="nav-link" href="#">
+                <span data-feather="folder-minus"></span>
+                Zone :
+              </a>
+            </td>
+
+            <td width= "40%">
+      
+                <div class="col-md-8" style="padding-left: 10px">
+                 <select class="form-select" id="valueSelectorLigneForAlert" name="select" onchange="handleDropdownLigneChangeForAlert()" style="padding-left: 10px">
+
+                    <option value="Tous les zones" selected>Tous les zones</option>
+                    <option value="07A" >07A</option>
+                    <option value="07B" >07B</option>
+                    <option value="07C" >07C</option>
+                    <option value="07D" >07D</option>
+                    <option value="107A" >107A</option>
+                    <option value="107B" >107B</option>
+                    <option value="107C" >107C</option>
+                    <option value="18" >U18</option>
+                    <option value="118" >U118</option>
+                    <option value="155" >155</option>
+                    <option value="116" >116</option>
+                    <option value="16" >U16</option>
+                    <option value="08" >U08</option>
+
+
+              </select>
+
+
+              </div>
+            </td>
+
+
+
+                      <td >
+              <a class="nav-link" href="#">
+                <span data-feather="folder-minus"></span>
+                Equipement :
+              </a>
+            </td>
+
+            <td width= "40%">
+      
+              <div class="col-md-8" style="padding-left: 10px">
+                <select class="form-select" id="valueSelectorEquipementForAlert" name="select" onchange="handleDropdownAlertZoneByEquipement()" style="padding-left: 10px">
+
+                    <option value="Tous les zones" selected>Choose...</option>
+
+
+
+                </select>
+
+
+              </div>
+            </td>
+            
+          </tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+
+        </table>
+
+
+
+      <div class="table-responsive">
+
+        <div id="responseTable2">
+          
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <h2 id='alarmesLabel'>Répartition des alarmes</h2>
 
       <div >
@@ -314,6 +411,17 @@
 
 
 
+    
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -332,7 +440,7 @@
             <td width= "80%">
       
                 <div class="col-md-8" style="padding-left: 10px">
-                 <select class="form-select" id="valueSelectorAlertZone" name="select" onchange="handleDropdownAlertZone()" style="padding-left: 10px">
+                 <select class="form-select" id="valueSelectorAlertZone" name="selectFiltredAlarm" onchange="handleDropdownAlertZone()" style="padding-left: 10px">
 
                     <option value="Tous les zones" selected>Tous les zones</option>
                     <option value="07A" >07A</option>
@@ -368,6 +476,10 @@
           
         </div>
       </div>
+
+      <div id="pointstr" style="display: none;" ></div>
+      <div id="seuilVstr" style="display: none;" ></div>
+      <div id="seuilAstr" style="display: none;" ></div>
 
 
 

@@ -46,7 +46,7 @@
             sendHttpRequest(selectedValue);             
       
 
-      }
+    }
 
 
 
@@ -160,4 +160,44 @@
       
 
       }
+
+
+
+    function handleDropdownLigneChangeForAlert(){
+
+
+
+
+        var dropdownForAlert = document.getElementById("valueSelectorLigneForAlert");
+        var dropdownToTargetForAlert = document.getElementById("valueSelectorEquipementForAlert");
+        
+
+
+        dropdownForAlert.disabled = true;
+        dropdownToTargetForAlert.disabled = true;
+
+        while (dropdownToTargetForAlert.firstChild) {
+            dropdownToTargetForAlert.removeChild(dropdownToTargetForAlert.firstChild);
+        }
+
+
+        
+        var selectedValue = '';
+        for (var i = 0; i < dropdownForAlert.options.length; i++) {
+                if (dropdownForAlert.options[i].selected) {
+                    selectedValue=dropdownForAlert.options[i].value;
+                    i=dropdownForAlert.options.length;
+                }
+            }
+
+            
+
+        
+
+            sendHttpRequestForAlert(selectedValue);             
+      
+
+    }
+
+
 
