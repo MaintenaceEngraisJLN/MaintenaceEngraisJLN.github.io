@@ -485,6 +485,10 @@ function handleDropdownAlertZoneByEquipement() {
       dropdownAlertEquipementByEquipement.disabled = false;
 
       
-
+      window.scroll({
+        top: 0, 
+        left: 0, 
+        behavior: 'smooth'
+      });
 }
       
