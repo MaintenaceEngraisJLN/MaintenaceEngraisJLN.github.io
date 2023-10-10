@@ -33,7 +33,7 @@
     <link href="dashboard.css" rel="stylesheet">
 
 
-    <title>Dashboard Maintenance Monitoringd</title>
+    <title>Dashboard Maintenance Monitoring</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 
@@ -89,47 +89,7 @@
 
     <script type="text/javascript" src="FilterAlertsByZone.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -167,7 +127,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" >
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -178,22 +138,22 @@
           </li>
           <li class="nav-item">
             <div class="col-md-10" style="padding-left: 10px">
-              <select class="form-select" id="valueSelectorLigne" name="select"  onchange="handleDropdownLigneChange()" style="padding-left: 10px">
-        
-                <option value="Blink" selected>Choose ...</option>
-                <option value="07A" >07A</option>
-                <option value="07B" >07B</option>
-                <option value="07C" >07C</option>
-                <option value="07D" >07D</option>
-                <option value="107A" >107A</option>
-                <option value="107B" >107B</option>
-                <option value="107C" >107C</option>
-                <option value="18" >U18</option>
-                <option value="118" >U118</option>
-                <option value="155" >155</option>
-                <option value="116" >116</option>
-                <option value="16" >U16</option>
-                <option value="08" >U08</option>
+              <select class="form-select" id="valueSelectorLigneForAlert" name="select" onchange="handleDropdownLigneChangeForAlert()" style="padding-left: 10px; ">
+
+                    <option value="Tous les zones" selected>Tous les zones</option>
+                    <option value="07A" >07A</option>
+                    <option value="07B" >07B</option>
+                    <option value="07C" >07C</option>
+                    <option value="07D" >07D</option>
+                    <option value="107A" >107A</option>
+                    <option value="107B" >107B</option>
+                    <option value="107C" >107C</option>
+                    <option value="18" >U18</option>
+                    <option value="118" >U118</option>
+                    <option value="155" >155</option>
+                    <option value="116" >116</option>
+                    <option value="16" >U16</option>
+                    <option value="08" >U08</option>
 
 
               </select>
@@ -214,13 +174,19 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="settings"></span>
-              Equipement :
+              Famille :
             </a>
           </li>
     
           <li class="nav-item">
             <div class="col-md-10" style="padding-left: 10px">
-               <select class="form-select" id="valueSelectorEquipement" name="select" onchange="handleDropdownEquipementChange()" style="padding-left: 10px"></select>
+               <select class="form-select" id="valueSelectorEquipementForAlert" name="select" onchange="handleDropdownAlertZoneByEquipement()" style="padding-left: 10px">
+
+                    <option value="Tous les zones" selected>Choose...</option>
+
+
+
+                </select>
             </div>
           </li>
 
@@ -231,18 +197,7 @@
           </li>
 
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="x-square"></span>
-              Point de mesure :
-            </a>
-          </li>
-    
-          <li class="nav-item">
-            <div class="col-md-10" style="padding-left: 10px">
-               <select class="form-select" id="valueSelectorPoint" name="select" onchange="handleDropdownPointChange()" style="padding-left: 10px"></select>
-            </div>
-          </li>
+
 
 
 
@@ -253,46 +208,109 @@
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Evolution des mesures</h1>
 
-   
-        <div class="btn-toolbar mb-2 mb-md-0">
 
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="resetZoom()">Reset Zoom</button>
-           
-          </div>
- 
+
+       <div  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1 border-bottom">
+          <h2 class="h2"></h2>
+
+     
+          
+
+                    
+        </div>
+      
+
+    
+
+
+
+      <div class="table-responsive">
+
+        <div id="responseTable2">
+          
         </div>
       </div>
 
+
+
+
+
+
+      <div id="plotArea" >
+
+
+       
+        <canvas id="canvas" class="my-4 w-100" width="900" height="250"></canvas>
+        <canvas id="canvasEmpty" class="my-4 w-100" width="900" height="250"></canvas>
+        <div  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1 border-bottom">
+          <h2 class="h2"></h2>
+
      
-      <canvas id="canvas" class="my-4 w-100" width="900" height="300"></canvas>
-      <canvas id="canvasEmpty" class="my-4 w-100" width="900" height="300"></canvas>
+          <div class="">
+
+            <div class="btn-group me-2">
+              
+              
+              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="resetZoom()">Reset Zoom</button>
+             
+            </div>
+   
+          </div>
+        </div>
+
+    </div>
 
 
 
 
 
 
-<h2 id='alarmesLabel'>Etat de vibration par famille d'équipement</h2>
 
-    <table>
-        <tr>
-          <td >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <h3 id='alarmesLabel'>Répartition des alarmes</h3>
+
+
+
+
+
+      <div >
+
+      <table>
+        <tr >
+            <td >
               <a class="nav-link" href="#">
                 <span data-feather="folder-minus"></span>
                 Zone :
               </a>
             </td>
 
-            <td width= "40%">
+            <td width="80%">
       
                 <div class="col-md-8" style="padding-left: 10px">
-                 <select class="form-select" id="valueSelectorLigneForAlert" name="select" onchange="handleDropdownLigneChangeForAlert()" style="padding-left: 10px">
+                 <select class="form-select" id="selectedlignerepartition" onchange="sendHttpRequestTable101()" style="padding-left: 10px">
 
-                    <option value="Tous les zones" selected>Tous les zones</option>
+                    <option value="Tous" selected>Tous</option>
                     <option value="07A" >07A</option>
                     <option value="07B" >07B</option>
                     <option value="07C" >07C</option>
@@ -313,68 +331,10 @@
 
               </div>
             </td>
-
-
-
-                      <td >
-              <a class="nav-link" href="#">
-                <span data-feather="folder-minus"></span>
-                Famille :
-              </a>
-            </td>
-
-            <td width= "40%">
-      
-              <div class="col-md-8" style="padding-left: 10px">
-                <select class="form-select" id="valueSelectorEquipementForAlert" name="select" onchange="handleDropdownAlertZoneByEquipement()" style="padding-left: 10px">
-
-                    <option value="Tous les zones" selected>Choose...</option>
-
-
-
-                </select>
-
-
-              </div>
-            </td>
-            
           </tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
 
         </table>
-
-
-
-      <div class="table-responsive">
-
-        <div id="responseTable2">
-          
-        </div>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <h2 id='alarmesLabel'>Répartition des alarmes</h2>
-
-      <div >
 
 
       <table  style = 'justify-content : center ; align-items : center' width="100%">
@@ -391,13 +351,17 @@
             </th>
 
 
-          <tr>
+          <tr >
             <td width="50%">
+            <
              <canvas id="ligneChart" height="200" style='flex : 1'></canvas>
+           
             </td> 
 
           <td>
+          
             <canvas id="familleChart" height="200" style='flex : 1'></canvas>
+          
           </td>
         </tr>
       </table>
@@ -419,14 +383,19 @@
 
 
 
+        <div  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1 border-bottom">
+          
+
+     
+        
+        </div>
 
 
 
 
 
 
-
-      <h2 id='alarmesLabel'>Liste des alarmes</h2>
+      <h3 id='alarmesLabel'>Liste des alarmes</h3>
 
     <table>
         <tr>
@@ -437,7 +406,7 @@
               </a>
             </td>
 
-            <td width= "80%">
+            <td width= "50%">
       
                 <div class="col-md-8" style="padding-left: 10px">
                  <select class="form-select" id="valueSelectorAlertZone" name="selectFiltredAlarm" onchange="handleDropdownAlertZone()" style="padding-left: 10px">
@@ -456,6 +425,30 @@
                     <option value="116" >116</option>
                     <option value="16" >U16</option>
                     <option value="08" >U08</option>
+
+
+              </select>
+
+
+              </div>
+            </td>
+
+
+                      <td >
+              <a class="nav-link" href="#">
+                <span data-feather="folder-minus"></span>
+                V/A :
+              </a>
+            </td>
+
+            <td width= "30%">
+      
+                <div class="col-md-8" style="padding-left: 10px">
+                 <select class="form-select" id="valueSelectorAlertType" name="selectFiltredAlarmType" onchange="handleDropdownAlertZone()" style="padding-left: 10px">
+
+                    <option value="Tous" selected>Tous</option>
+                    <option value="Vitesse" >Vitesse</option>
+                    <option value="Accélération" >Accélération</option>
 
 
               </select>
@@ -489,6 +482,11 @@
       <div id="selectedTDoldColor" style="display: none;" ></div>
       <div id="selectedTDEoldColor" style="display: none;" ></div>
       <div id="selectedTDPoldColor" style="display: none;" ></div>
+      <div id="test" style="display: none;" ></div>
+      <div id="nbrEqui" style="display: none;" ></div>
+      <div id="nbrPoint" style="display: none;" ></div>
+      <div id="temp" style="display: none;" ></div>
+
 
 
 
@@ -513,6 +511,10 @@
       <script src="chartjs-plugin-zoom.min.js"></script>
 
       <script src="emptyCanvas.js"></script>
+
+
+
+
 
 
   </body>

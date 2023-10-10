@@ -209,43 +209,143 @@ function handleClick() {
     alert("The <td> was clicked!");
 }
 
-function showTrendFunction(l,e,p,i){
+function showTrendFunction(ligne,e,p,i){
 
         var ids = i.split('|');
+        var countV=0;
+        var countH=0;
 
-
-        if (document.getElementById("selectedTDid").innerText!=""){
-
-            var oldids = document.getElementById("selectedTDid").innerText.split('|');
-            document.getElementById(document.getElementById("selectedTDid").innerText).style.backgroundColor=document.getElementById("selectedTDoldValue").innerText;
-            document.getElementById(document.getElementById("selectedTDid").innerText).style.color=document.getElementById("selectedTDoldColor").innerText;
-
-            document.getElementById("E"+oldids[0]).style.backgroundColor=document.getElementById("selectedTDEoldColor").innerText;
-            document.getElementById("E"+oldids[0]).style.color="black";
+        if(document.getElementById(i).style.backgroundColor != "yellow"){
+            document.getElementById("E"+ids[0]).style.backgroundColor = "yellow";
+            document.getElementById("P"+ids[1]).style.backgroundColor = "yellow";
+            document.getElementById("E"+ids[0]).style.color = "black";
+            document.getElementById("P"+ids[1]).style.color = "black";
+            document.getElementById(i).style.backgroundColor = "yellow";
             
-            document.getElementById("P"+oldids[1]).style.backgroundColor=document.getElementById("selectedTDPoldColor").innerText;
-            document.getElementById("P"+oldids[1]).style.color="black";
+            
+        }else{
+
+            var nbrE = document.getElementById("nbrEqui").innerText;
+            var nbrP = document.getElementById("nbrPoint").innerText;
+
+            for(var k=1;k<nbrE;k++){
+
+
+
+                if(document.getElementById(k+"|"+ids[1]).style.backgroundColor=="yellow"){
+
+                    countV = countV+1;
+                }
+            }
+
+
+            for(var k=1;k<nbrP;k++){
+
+                if(document.getElementById(ids[0]+"|"+k).style.backgroundColor=="yellow"){
+
+                    countH = countH+1;
+                }
+            }
+
+            if(countH==1){
 
             
+                if (ids[0] % 2 === 0){
+                    document.getElementById("E"+ids[0]).style.backgroundColor = document.getElementById("idequi").style.backgroundColor;
+                    document.getElementById(i).style.backgroundColor = document.getElementById("idequi").style.backgroundColor;
+                }else{
+                    document.getElementById("E"+ids[0]).style.backgroundColor = "white";
+                    document.getElementById(i).style.backgroundColor = "white";
+                    
+                }
+
+            }else{
+
+                if (ids[0] % 2 === 0){
+                    
+                    document.getElementById(i).style.backgroundColor = document.getElementById("idequi").style.backgroundColor;
+                }else{
+                    
+                    document.getElementById(i).style.backgroundColor = "white";
+                    
+                }
+
+
+            }
+
+
+
+            if(countV==1){
+
+            
+                document.getElementById("P"+ids[1]).style.backgroundColor = document.getElementById("idequi").style.backgroundColor;
+
+            }
+
+
+            
+           
+            document.getElementById("E"+ids[0]).style.color = "black";
+            document.getElementById("P"+ids[1]).style.color = "black";
+
         }
-            document.getElementById("selectedTDid").innerText= i;
-            document.getElementById("selectedTDoldValue").innerText=document.getElementById(i).style.backgroundColor;
-            document.getElementById("selectedTDoldColor").innerText=document.getElementById(i).style.color;
 
-            document.getElementById("selectedTDEoldColor").innerText=document.getElementById("E"+ids[0]).style.backgroundColor;
-            document.getElementById("selectedTDPoldColor").innerText=document.getElementById("P"+ids[1]).style.backgroundColor;
 
-            document.getElementById("E"+ids[0]).style.backgroundColor = "blue";
-            document.getElementById("P"+ids[1]).style.backgroundColor = "blue";
-            document.getElementById(i).style.backgroundColor = "blue";
 
-            document.getElementById("E"+ids[0]).style.color = "white";
-            document.getElementById("P"+ids[1]).style.color = "white";
-            document.getElementById(i).style.color = "white";
 
-            sendHttpRequest2(l,e,p);
+
+        var table = document.getElementById("stateMap");
+        var trElements = table.getElementsByTagName("tr");
+        var tdElements = table.getElementsByTagName("td");
+        var blueBackgroundTDIds = [];
+        var t1="";
+
+        for (var s = 1; s < trElements.length; s++) {
+            var tr = trElements[s];
+            var tdi = tr.getElementsByTagName("td");
+
+            var backgroundColorE = window.getComputedStyle(tdi[0]).backgroundColor;
+
+
+            if (backgroundColorE === "rgb(255, 255, 0)" || backgroundColorE === "yellow") {
+
+                if (t1!=""){
+
+                    t1=t1+","+document.getElementById(tdi[0].id).innerText;                
+                
+                }else{
+                    t1=document.getElementById(tdi[0].id).innerText;
+
+                }
+
             
+
+                for (var l = 1; l < tdi.length; l++) {
+                    var td = tdi[l];
+                    var backgroundColor = window.getComputedStyle(td).backgroundColor;
+
+
+                    // Check if the background color is blue (adjust the color value as needed)
+                    if (backgroundColor === "rgb(255, 255, 0)" || backgroundColor === "yellow") {
+                        
+                           var ids = td.id.split('|');
+                           t1=t1+"$"+ document.getElementById("P"+ids[1]).innerText;
+                    }
+                        
+                }
+
+            
+            }
+
+        }
+
+        
+        
+         
+
+        sendHttpRequest21(ligne,t1);
           
       
-
+       //document.getElementById("temp").innerText=t1;
       }
+

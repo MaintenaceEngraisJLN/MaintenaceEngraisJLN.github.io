@@ -1,7 +1,9 @@
  
     function handleDropdownAlertZone() {
       var dropdownAlertZone = document.getElementById("valueSelectorAlertZone");
+      var dropdownAlertType = document.getElementById("valueSelectorAlertType");
       dropdownAlertZone.disabled = true;
+      dropdownAlertType.disabled = true;
       handleDropdownAlertZone2();
 
     }
@@ -32,6 +34,7 @@
 
 
       var dropdownAlertZone = document.getElementById("valueSelectorAlertZone");  
+      var dropdownAlertType = document.getElementById("valueSelectorAlertType");  
       
 
       var selectedValueAZ = '';
@@ -40,6 +43,16 @@
                 if (dropdownAlertZone.options[i].selected) {
                     selectedValueAZ=dropdownAlertZone.options[i].value;
                     i=dropdownAlertZone.options.length;
+                }
+        }
+
+
+      var selectedValueAT = '';
+
+      for (var i = 0; i < dropdownAlertType.options.length; i++) {
+                if (dropdownAlertType.options[i].selected) {
+                    selectedValueAT=dropdownAlertType.options[i].value;
+                    i=dropdownAlertType.options.length;
                 }
         }
 
@@ -73,12 +86,43 @@
       
       for (var i = 1; i < responseLines.length; i++) {
         var fields = responseLines[i].split(',');
-        if (fields[0] == selectedValueAZ || selectedValueAZ == "Tous les zones" )  {  
-            tableHtml += "<tr>";
-            for (var j = 0; j < fields.length; j++) {
-              tableHtml += "<td>" + fields[j] + "</td>";
+
+        if(selectedValueAT=="Tous"){
+
+          if (fields[0] == selectedValueAZ || selectedValueAZ == "Tous les zones" )  {  
+              tableHtml += "<tr>";
+              for (var j = 0; j < fields.length; j++) {
+                tableHtml += "<td>" + fields[j] + "</td>";
+              }
+              tableHtml += "</tr>";
+          }
+        }else{
+
+          if(selectedValueAT=="Vitesse" && fields[3].includes("Vitesse")){
+
+            if (fields[0] == selectedValueAZ || selectedValueAZ == "Tous les zones" )  {  
+                tableHtml += "<tr>";
+                for (var j = 0; j < fields.length; j++) {
+                  tableHtml += "<td>" + fields[j] + "</td>";
+                }
+                tableHtml += "</tr>";
             }
-            tableHtml += "</tr>";
+
+          }
+          if(selectedValueAT=="Accélération" && fields[3].includes("Accélération")){
+
+            if (fields[0] == selectedValueAZ || selectedValueAZ == "Tous les zones" )  {  
+                tableHtml += "<tr>";
+                for (var j = 0; j < fields.length; j++) {
+                  tableHtml += "<td>" + fields[j] + "</td>";
+                }
+                tableHtml += "</tr>";
+            }
+
+          }
+
+
+
         }
       }
       
@@ -86,6 +130,7 @@
       document.getElementById("responseTable1").innerHTML = tableHtml;
 
       dropdownAlertZone.disabled = false;
+      dropdownAlertType.disabled = false;
 
       
 
@@ -258,7 +303,7 @@ function handleDropdownAlertZoneByEquipement() {
 
 
 
-        var tableHtml = "<table class='table table-striped table-sm'><tr><th style='text-align: center; vertical-align: middle;'>Equipement</th>";
+        var tableHtml = "<table id='stateMap' class='table table-striped table-sm' ><tr><th id='idequi' style='text-align: center; vertical-align: middle;'>Equipement</th>";
 
         for(var j=0; j<entetToKeep.length;j++){
 
@@ -349,7 +394,7 @@ function handleDropdownAlertZoneByEquipement() {
 
                              
 
-                              tableHtml += "<td id='"+idStr+"' style='background-color: red; text-align: center; vertical-align: middle; color: white; font-weight: bold; cursor: pointer;' onclick= \"showTrendFunction("+"'"+selectedValueAZ+"','"+equipement+"','"+points[k]+"','"+idStr+"'"+")\" >";
+                              tableHtml += "<td id='"+idStr+"' style='text-align: center; vertical-align: middle; color: red; font-weight: bold; cursor: pointer;' onclick= \"showTrendFunction("+"'"+selectedValueAZ+"','"+equipement+"','"+points[k]+"','"+idStr+"'"+")\" >";
                               tableHtml += equipementRecord[w] ;
                               tableHtml += "</td>";
                               
@@ -379,7 +424,7 @@ function handleDropdownAlertZoneByEquipement() {
 
                               idStr = idEquipement + "|" + idPoint;
 
-                              tableHtml += "<td id='"+idStr+"' style='background-color: #fc0394; text-align: center; vertical-align: middle; color : white; font-weight: bold; cursor: pointer;' onclick= \"showTrendFunction("+"'"+selectedValueAZ+"','"+equipement+"','"+points[k]+"','"+idStr+"'"+")\">";
+                              tableHtml += "<td id='"+idStr+"' style=' text-align: center; vertical-align: middle; color : #fc0394; font-weight: bold; cursor: pointer;' onclick= \"showTrendFunction("+"'"+selectedValueAZ+"','"+equipement+"','"+points[k]+"','"+idStr+"'"+")\">";
                               tableHtml += equipementRecord[w];
                               tableHtml += "</td>";
                               
@@ -426,6 +471,8 @@ function handleDropdownAlertZoneByEquipement() {
 
 
       document.getElementById("responseTable2").innerHTML = tableHtml;
+      document.getElementById("nbrEqui").innerText=idEquipement+1;
+      document.getElementById("nbrPoint").innerText=points.length*2+1;
 
 
       
