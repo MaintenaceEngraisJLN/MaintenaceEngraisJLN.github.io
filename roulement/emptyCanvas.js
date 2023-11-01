@@ -15,7 +15,7 @@
         datasets: [{
           label: 'Jeu de roulement',
           data: [0],
-          borderColor : '#FC2C00',
+          borderColor : 'red',
           fill: false,
           borderDash: [5, 5],
         }]
@@ -24,7 +24,7 @@
         responsive: true,
         title: {
           display: true,
-          text: 'Evolution des valeurs de Jeu de roulement'
+          text: 'Evolution des valeurs des Jeux de roulement'
         },
         scales: {
           xAxes: [{
@@ -34,6 +34,7 @@
               // round: 'day'
               //tooltipFormat: 'll HH:mm'
               unit: 'day'
+
             },
             scaleLabel: {
               display: true,
@@ -82,4 +83,7 @@
       window.myLine = new window.Chart(ctx, config1);
     };
      
+
+
+ 
     

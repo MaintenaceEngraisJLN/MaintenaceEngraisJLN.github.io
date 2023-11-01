@@ -15,7 +15,7 @@
         datasets: [{
           label: 'Température',
           data: [0],
-          borderColor : '#FC2C00',
+          borderColor : 'red',
           fill: false,
           borderDash: [5, 5],
         }]
@@ -34,6 +34,7 @@
               // round: 'day'
               //tooltipFormat: 'll HH:mm'
               unit: 'day'
+
             },
             scaleLabel: {
               display: true,
@@ -82,4 +83,7 @@
       window.myLine = new window.Chart(ctx, config1);
     };
      
+
+
+ 
     
